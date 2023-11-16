@@ -31,26 +31,65 @@ export default function App() {
   }
 
   return (
-    <>
-      <h1>Daftar Belanjaan</h1>
-      <input type="text" value={item} onChange={bacaInputItem} />
-      <button onClick={tambahDaftar}>Tambah</button>
-      <ul>
-        {daftar.map((item, index) => (
-          <li key={index}>
-            {item} <button onClick={() => beliItem(index)}>Sudah dibeli</button>
-            <button onClick={() => hapusItem(index)}>Hapus</button>
-          </li>
-        ))}
-      </ul>
-      <h1>Daftar sudah dibeli</h1>
-      <ul>
-        {beli.map((item, index) => (
-          <li key={index}>
-            {item} <button onClick={() => batalBeli(index)}>Batal</button>
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className="container pt-3">
+      <div className="input-group mt-3">
+        <input
+          type="text"
+          value={item}
+          onChange={bacaInputItem}
+          className="form-control"
+        />
+        <button onClick={tambahDaftar} className="btn btn-success">
+          Tambah
+        </button>
+      </div>
+      <div className="row mt-3">
+        <div className="col-md-6">
+          <h5>Daftar Belanjaan ({daftar.length} items)</h5>
+          <ul className="list-group">
+            {daftar.map((item, index) => (
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span>{item}</span>
+                <div className="btn-group">
+                  <button
+                    className="btn btn-success"
+                    onClick={() => beliItem(index)}
+                  >
+                    Sudah dibeli
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => hapusItem(index)}
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="col-md-6">
+          <h5>Daftar sudah dibeli ({beli.length} items)</h5>
+          <ul className="list-group">
+            {beli.map((item, index) => (
+              <li className="list-group-item" key={index}>
+                <div className="d-flex justify-content-between align-items center">
+                  <span>{item}</span>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => batalBeli(index)}
+                  >
+                    Batal
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
